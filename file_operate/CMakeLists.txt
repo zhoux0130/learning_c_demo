@@ -3,4 +3,4 @@ project(fileoperate C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(fileoperate main.c)
+add_executable(fileoperate main.c main1.c)

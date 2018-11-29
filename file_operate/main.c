@@ -24,13 +24,8 @@ struct product {
     int quantity;
 };
 
-int main() {
+int main1() {
 
-    // 通过data文件，读入对应的数据（读文件操作）
-    // 每一行的数据对应结构体
-    // 将其进行展示
-    // 可以从控制台输入对应的编号，表示选择购买的产品
-    // 完成对应的产品的库存数据更新，同步到库存信息文件中（写文件操作）
     FILE *fpReader = fopen("../data.txt", "r");
     char lines[STLEN];
 
@@ -65,7 +60,6 @@ int main() {
     scanf("%d", &productId);
     productList[productId - 1].quantity++;
 
-    printf("TEST");
     FILE *fpWriter = fopen("../data.txt", "w+");
     ftruncate(fpWriter, 0);
 
