@@ -16,9 +16,8 @@ struct card {
  * 在链表的头部插入元素
  */
 struct card *add2List(struct card *list, int suit, int number) {
-  struct card *newNode;
+  struct card *newNode = malloc(sizeof(struct card));
 
-  newNode = malloc(sizeof(struct card));
   newNode->suit = suit;
   newNode->numbers = number;
   newNode->next = list;
@@ -80,7 +79,7 @@ struct card *initCard() {
 
 void printCard(struct card *cardList){
   struct card *cur;
-  for(cur = cardList; cur != NULL;cur = cur->next){
+  for(cur = cardList; cur != NULL; cur = cur->next) {
     printf("花色：%d, 数值：%d\n", cur->suit, cur->numbers);
   }
 }
@@ -88,7 +87,7 @@ void printCard(struct card *cardList){
 int length(struct card *cardList){
   struct card *card = cardList;
   int len = 0;
-  while(card != NULL){
+  while (card != NULL) {
     ++len;
     card = card->next;
   }
