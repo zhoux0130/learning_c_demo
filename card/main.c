@@ -31,8 +31,8 @@ struct card *add2List(struct card *list, int suit, int number) {
 struct card *deleteNode(struct card *list, int suit, int number) {
     struct card *cur, *prev = NULL;
     for (cur = list;
-             cur != NULL && (cur->suit != suit || cur->numbers != number);
-             prev = cur, cur = cur->next);
+         cur != NULL && (cur->suit != suit || cur->numbers != number);
+         prev = cur, cur = cur->next);
 
     if (cur == NULL) {
         return list;
