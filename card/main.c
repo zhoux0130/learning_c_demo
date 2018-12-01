@@ -26,8 +26,6 @@ struct card *add2List(struct card *list, int suit, int number) {
     return newNode;
 }
 
-// 插入时按照顺序
-
 
 /**
  * 删除链表中的指定元素
@@ -123,12 +121,10 @@ int hasCycle(struct card *list) {
     }
 
     struct card *step = list, *doubleStep = list;
-    while (step != NULL) {
+    while (step && doubleStep->next) {
         step = step->next;
-        if (doubleStep->next == NULL) {
-            return 0;
-        }
         doubleStep = doubleStep->next->next;
+
         if (NULL == doubleStep) {
             return 0;
         }
@@ -246,7 +242,7 @@ int main() {
 
     while (cardList != NULL) {
         struct card *leftCard = cardList;
-        addCardInSort(personalCardList[index], leftCard->suit, leftCard->numbers);
+        personalCardList[index] = addCardInSort(personalCardList[index], leftCard->suit, leftCard->numbers);
         cardList = cardList->next;
     }
 
@@ -257,7 +253,7 @@ int main() {
 //    struct card c3 = {.numbers=1, .suit=1};
 //    struct card c2 = {.numbers=2, .suit=2, .next=&c3};
 //    struct card c1 = {.numbers=3, .suit=3, .next=&c2};
-//    c3.next= &c1;
+////    c3.next= &c1;
 //
 //    printf("%d",hasCycle(&c1));
 
