@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.12)
-project(fileoperate C)
+project(file_operate C)
 
-set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_STANDARD 11)
 
-add_executable(fileoperate main.c main1.c)
+add_executable(file_operate
+        main.c
+        main1.c)
