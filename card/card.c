@@ -7,28 +7,34 @@ typedef struct {
     int number;
 } card;
 
-void initCard(card *cards) {
+card *initCard(int suit, int number) {
+    card *theCard = malloc(sizeof(card));
+    theCard->number = number;
+    theCard->suit = suit;
+    return theCard;
+}
+
+void initCardList(card *cards[]) {
     int cardNum = 0;
     for (int j = 0; j < 4; ++j) {
         for (int i = 1; i <= 13; ++i) {
-            card theCard = {.suit=j, .number=i};
-            cards[cardNum] = theCard;
+            cards[cardNum] = initCard(j, i);
             cardNum++;
         }
     }
 
-    card jokerSmall = {.suit=4, .number=14};
-    card jokerBig = {.suit=4, .number=15};
+    card *jokerSmall = initCard(4, 14);//小王
+    card *jokerBig = initCard(4, 15);//大王
     cards[52] = jokerSmall;
     cards[53] = jokerBig;
 }
 
-void showCard(card *cardList, int length) {
+void showCard(card *cardList[], int length) {
     char *cardContent = malloc(sizeof(char));
 
     for (int i = 0; i < length; ++i) {
-        card theCard = cardList[i];
-        switch (theCard.suit) {
+        card *theCard = cardList[i];
+        switch (theCard->suit) {
             case 0:
                 strcpy(cardContent, "♦");
                 break;
@@ -47,7 +53,7 @@ void showCard(card *cardList, int length) {
         }
 
         char str[10];
-        switch (theCard.number) {
+        switch (theCard->number) {
             case 1:
                 strcat(cardContent, "A");
                 break;
@@ -61,7 +67,7 @@ void showCard(card *cardList, int length) {
                 strcat(cardContent, "K");
                 break;
             default:
-                sprintf(str, "%d", theCard.number);
+                sprintf(str, "%d", theCard->number);
                 strcat(cardContent, str);
                 break;
         }
@@ -73,8 +79,12 @@ void showCard(card *cardList, int length) {
 }
 
 int main(void) {
-    card *cards = malloc(54 * sizeof *cards);
-    initCard(cards);
+    card *cards[54];
+    initCardList(cards);
     showCard(cards, 54);
+
+    for (int i = 0; i < 54; ++i) {
+        free(cards[i]);
+    }
 }
 

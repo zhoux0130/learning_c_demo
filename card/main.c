@@ -81,9 +81,10 @@
 //    return cardList;
 //}
 //
+///**
+// * 链表的插入排序
+// */
 //struct card *addCardInSort(struct card *list, int suit, int number) {
-//    struct card *cur, *prev, *head;
-//
 //    struct card *newNode = malloc(sizeof(struct card));
 //    newNode->suit = suit;
 //    newNode->numbers = number;
@@ -93,6 +94,7 @@
 //        return newNode;
 //    }
 //
+//    struct card *cur, *prev, *head;
 //    cur = list;
 //    head = list;
 //    prev = NULL;
@@ -110,6 +112,15 @@
 //    newNode->next = cur;
 //
 //    return head;
+//}
+//
+///**
+// * 链表的插入排序
+// */
+//int hasCycle(struct card *list){
+//    struct card *step = list, *doubleStep = list;
+//
+//
 //}
 //
 //void printCard(struct card *cardList) {
