@@ -7,26 +7,6 @@ typedef struct {
     int number;
 } card;
 
-char *itoa(int i, char b[]) {
-    char const digit[] = "0123456789";
-    char *p = b;
-    if (i < 0) {
-        *p++ = '-';
-        i *= -1;
-    }
-    int shifter = i;
-    do { //Move to where representation ends
-        ++p;
-        shifter = shifter / 10;
-    } while (shifter);
-    *p = '\0';
-    do { //Move back, inserting digits as u go
-        *--p = digit[i % 10];
-        i = i / 10;
-    } while (i);
-    return b;
-}
-
 void initCard(card *cards) {
     int cardNum = 0;
     for (int j = 0; j < 4; ++j) {
@@ -81,7 +61,7 @@ void showCard(card *cardList, int length) {
                 strcat(cardContent, "K");
                 break;
             default:
-                itoa(theCard.number, str);
+                sprintf(str, "%d", theCard.number);
                 strcat(cardContent, str);
                 break;
         }
@@ -93,10 +73,8 @@ void showCard(card *cardList, int length) {
 }
 
 int main(void) {
-
     card *cards = malloc(54 * sizeof *cards);
     initCard(cards);
     showCard(cards, 54);
-
 }
 
