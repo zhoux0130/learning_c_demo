@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define CARD_COUNT 54
+
 typedef struct {
     int suit;
     int number;
@@ -79,11 +81,11 @@ void showCard(card *cardList[], int length) {
 }
 
 int main(void) {
-    card *cards[54];
+    card *cards[CARD_COUNT];
     initCardList(cards);
-    showCard(cards, 54);
+    showCard(cards, CARD_COUNT);
 
-    for (int i = 0; i < 54; ++i) {
+    for (int i = 0; i < CARD_COUNT; ++i) {
         free(cards[i]);
     }
 }
