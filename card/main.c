@@ -90,7 +90,7 @@ struct card *addCardInSort(struct card *list, int suit, int number) {
     newNode->numbers = number;
     newNode->next = NULL;
 
-    if (list == NULL ) {
+    if (list == NULL) {
         return newNode;
     }
 
@@ -98,15 +98,15 @@ struct card *addCardInSort(struct card *list, int suit, int number) {
     cur = list;
     head = list;
     prev = NULL;
-    while(cur != NULL &&
-          (cur->numbers < number || (cur->numbers == number && cur->suit < suit))){
+    while (cur != NULL &&
+           (cur->numbers < number || (cur->numbers == number && cur->suit < suit))) {
         prev = cur;
         cur = cur->next;
     }
 
-    if(prev == NULL){
+    if (prev == NULL) {
         head = newNode;
-    }else{
+    } else {
         prev->next = newNode;
     }
     newNode->next = cur;
@@ -117,22 +117,22 @@ struct card *addCardInSort(struct card *list, int suit, int number) {
 /**
  * 链表的插入排序
  */
-int hasCycle(struct card *list){
-    if(list == NULL){
+int hasCycle(struct card *list) {
+    if (list == NULL) {
         return 0;
     }
 
     struct card *step = list, *doubleStep = list;
-    while(step != NULL){
-        step = step->next ;
-        if(doubleStep->next == NULL){
+    while (step != NULL) {
+        step = step->next;
+        if (doubleStep->next == NULL) {
             return 0;
         }
         doubleStep = doubleStep->next->next;
-        if (NULL == doubleStep){
+        if (NULL == doubleStep) {
             return 0;
         }
-        if(step == doubleStep){
+        if (step == doubleStep) {
             return 1;
         }
     }
@@ -157,6 +157,55 @@ int length(struct card *cardList) {
     return len;
 }
 
+void showCard(struct card *cardList) {
+    char *cardContent = malloc(sizeof(char));
+    struct card *theCard = cardList;
+
+    while (theCard != NULL) {
+        switch (theCard->suit) {
+            case 0:
+                strcpy(cardContent, "♦");
+                break;
+            case 1:
+                strcpy(cardContent, "♣");
+                break;
+            case 2:
+                strcpy(cardContent, "♥");
+                break;
+            case 3:
+                strcpy(cardContent, "♠");
+                break;
+            default:
+                strcpy(cardContent, "Joker");
+                break;
+        }
+
+        char str[10];
+        switch (theCard->numbers) {
+            case 1:
+                strcat(cardContent, "A");
+                break;
+            case 11:
+                strcat(cardContent, "J");
+                break;
+            case 12:
+                strcat(cardContent, "Q");
+                break;
+            case 13:
+                strcat(cardContent, "K");
+                break;
+            default:
+                sprintf(str, "%d", theCard->numbers);
+                strcat(cardContent, str);
+                break;
+        }
+
+        strcat(cardContent, " ");
+        printf("%s", cardContent);
+        theCard = theCard->next;
+    }
+}
+
 
 int main() {
     srand(time(NULL));
@@ -179,21 +228,38 @@ int main() {
             cardNum--;
             cardList = deleteNode(cardList, cardNode->suit, cardNode->numbers);
         }
-        printf("当前这个人拿了%d张牌\n", length(personalCardList[i]));
     }
 
-    printCard(personalCardList[0]);
-    printf("第二个人的牌\n");
-    printCard(personalCardList[1]);
-    printf("第3个人的牌\n");
-    printCard(personalCardList[2]);
+    printf("0拿到的牌\n");
+    showCard(personalCardList[0]);
+    printf("\n1拿到的牌\n");
+    showCard(personalCardList[1]);
+    printf("\n2拿到的牌\n");
+    showCard(personalCardList[2]);
 
-    struct card c3 = {.numbers=1, .suit=1};
-    struct card c2 = {.numbers=2, .suit=2, .next=&c3};
-    struct card c1 = {.numbers=3, .suit=3, .next=&c2};
-    c3.next= &c1;
+    printf("\n谁来当地主？\n");
+    int index;
+    scanf("%d", &index);
 
-    printf("%d",hasCycle(&c1));
+    printf("\n底牌为:\n");
+    showCard(cardList);
+
+    while (cardList != NULL) {
+        struct card *leftCard = cardList;
+        addCardInSort(personalCardList[index], leftCard->suit, leftCard->numbers);
+        cardList = cardList->next;
+    }
+
+    printf("\n地主的牌重新整理:\n");
+    showCard(personalCardList[index]);
+
+
+//    struct card c3 = {.numbers=1, .suit=1};
+//    struct card c2 = {.numbers=2, .suit=2, .next=&c3};
+//    struct card c1 = {.numbers=3, .suit=3, .next=&c2};
+//    c3.next= &c1;
+//
+//    printf("%d",hasCycle(&c1));
 
 
     return 0;
