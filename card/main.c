@@ -164,6 +164,7 @@ int length(struct card *cardList) {
 
 void showCard(struct card *cardList) {
     /* char *cardContent = malloc(sizeof(char)); */
+    // 上面的malloc大小不够，直接使用数组即可。
     char cardContent[10];
     struct card *theCard = cardList;
 
