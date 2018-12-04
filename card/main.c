@@ -27,6 +27,15 @@ struct card *add2List(struct card *list, int suit, int number) {
 }
 
 
+void cleanCardList(struct card *list) {
+  while (list) {
+    struct card *cur = list;
+    list = list->next;
+    free(cur);
+  }
+}
+
+
 /**
  * 删除链表中的指定元素
  */
@@ -154,7 +163,9 @@ int length(struct card *cardList) {
 }
 
 void showCard(struct card *cardList) {
-    char *cardContent = malloc(sizeof(char));
+    /* char *cardContent = malloc(sizeof(char)); */
+    // 上面的malloc大小不够，直接使用数组即可。
+    char cardContent[10];
     struct card *theCard = cardList;
 
     while (theCard != NULL) {
@@ -257,6 +268,10 @@ int main() {
 //
 //    printf("%d",hasCycle(&c1));
 
+    cleanCardList(cardList);
+    for (int i = 0; i < sizeof(personalCardList) / sizeof(personalCardList[0]); i++) {
+      cleanCardList(personalCardList[i]);
+    }
 
     return 0;
 }
