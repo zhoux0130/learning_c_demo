@@ -226,11 +226,11 @@ int main() {
         }
     }
 
-    printf("0拿到的牌\n");
+    printf("A拿到的牌\n");
     showCard(personalCardList[0]);
-    printf("\n1拿到的牌\n");
+    printf("\nB拿到的牌\n");
     showCard(personalCardList[1]);
-    printf("\n2拿到的牌\n");
+    printf("\nC拿到的牌\n");
     showCard(personalCardList[2]);
 
     printf("\n谁来当地主？\n");

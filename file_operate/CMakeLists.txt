@@ -5,4 +5,4 @@ set(CMAKE_C_STANDARD 11)
 
 add_executable(file_operate
         main.c
-        main1.c)
+        main1.c file_rw.c)
