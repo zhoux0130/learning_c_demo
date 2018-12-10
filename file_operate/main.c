@@ -24,7 +24,7 @@ struct product {
     int quantity;
 };
 
-int main(int argc, char **argv) {
+int m23ain(int argc, char **argv) {
 
     FILE *fpReader = fopen(argv[1], "r+");
     char lines[STLEN];
@@ -48,6 +48,12 @@ int main(int argc, char **argv) {
         strcpy(item.category, itemList[5]);
         item.quantity = (int) strtol(itemList[6], NULL, 10);
 
+
+//        printf("%s | %s | %s| 原价：￥%s | 促销价：￥%s\n", itemList[0], itemList[1], itemList[2],
+////               itemList[3], itemList[4]);    }
+
+//        printf("%d | %s | %s| 原价：￥%.2f | 促销价：￥%.2f\n", item->id, item->brand, item->name,
+//               item->originPrice, item->price);
         printf("%d | %s | %s| 原价：￥%.2f | 促销价：￥%.2f\n", item.id, item.brand, item.productName,
                item.originPrice, item.price);
 
@@ -60,9 +66,9 @@ int main(int argc, char **argv) {
     scanf("%c", &str);
 
     if (str == 'Y') {
-        fprintf(fpReader, "%d,%s,%s,%.2f,%.2f,%s,%d\n", 3, "苹果", "iPad Pro 11寸", 6499.0,
+        fprintf(fpReader, "%d,%s,%s,%.2f,%.2f,%s,%d\n", 6, "苹果", "iPad Pro 11寸", 6499.0,
                 6099.0, "IT",
-                4);
+                0);
     } else {
         printf("你想要购买哪一件呢？请输入编号吧\n");
         int productId;
@@ -76,6 +82,9 @@ int main(int argc, char **argv) {
             fprintf(fpReader, "%d,%s,%s,%.2f,%.2f,%s,%d\n", item.id, item.brand, item.productName, item.originPrice,
                     item.price, item.category,
                     item.quantity);
+//            fprintf(fpWriter, "%d,%s,%s,%.2f,%.2f,%s,%d\n", item->id, item->brand, item->name, item->originPrice,
+//                    item->price, item->category,
+//                    item->quantity);
         }
     }
 

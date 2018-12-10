@@ -2,11 +2,15 @@
 #include <string.h>
 #include <stdlib.h>
 
-int main1(int args, char *argv[]){
+int m3ain(int args, char *argv[]){
+
+    printf("1. 文件的类型及读写基础"
+           "2. 文件读写的应用"
+           "3. 多个文件引用的支持");
 
     int i = 10;
     FILE *f1 = fopen("../file", "wb");
-    int r1 = fwrite(&i, sizeof(int), 1, f1);
+    fwrite(&i, sizeof(int), 1, f1);
     fclose(f1);
 
     FILE *f2 = fopen("../file.txt", "w");
@@ -52,27 +56,5 @@ int main1(int args, char *argv[]){
 //
 //    free_test();
 
-}
-
-char *concat(const char *s1, const char *s2){
-    char *result;
-    result = malloc(strlen(s1) + strlen(s2) + 1);
-
-    strcpy(result, s1);
-    strcat(result, s2);
-
-    return result;
-}
-
-void free_test(){
-    int *p;
-    p = (int *) malloc(sizeof(int));
-
-    scanf("%d", &p[0]);
-    printf("%d\n", p[0]);
-
-    free(p);
-    printf("%x\n", p);
-    printf("%d\n", p[0]);
 }
 
